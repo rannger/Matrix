@@ -124,8 +124,8 @@ static void __add_info_for_image(const struct mach_header *header, intptr_t slid
 	static const size_t kMaxAppBundleNameLength = 155;
 	const size_t app_name_length = strnlen(app_bundle_name, kMaxAppBundleNameLength) * 2 + 7;
 	const size_t app_bundle_length = strnlen(app_bundle_name, kMaxAppBundleNameLength) + 7;
-  char *app_name = new char[app_name_length];
-  char *app_bundle = new char[app_bundle_length];
+  char app_name[app_name_length];
+  char app_bundle[app_bundle_length];
 	bzero(app_name,app_name_length);
 	bzero(app_bundle,app_bundle_length);
 	snprintf(app_name, app_name_length, "/%s.app/%s", app_bundle_name, app_bundle_name);
@@ -165,8 +165,6 @@ static void __add_info_for_image(const struct mach_header *header, intptr_t slid
 		}
 	}
 
-	delete [] app_name;
-	delete [] app_bundle;
 	// Sort list
 	int i = 0;
 	for (; i < image_info_file.count; ++i) {
