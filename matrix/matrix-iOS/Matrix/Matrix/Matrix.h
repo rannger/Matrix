@@ -18,8 +18,6 @@
 #import <TargetConditionals.h>
 #import "MatrixFramework.h"
 #import "MatrixAppRebootType.h"
-#import "WCCrashBlockMonitorPlugin.h"
-#import "WCCrashBlockMonitorPlugin+Upload.h"
 #import "WCMemoryStatPlugin.h"
 
 @class MatrixPlugin;

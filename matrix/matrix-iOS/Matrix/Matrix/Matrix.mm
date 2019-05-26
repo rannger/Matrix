@@ -18,7 +18,6 @@
 #import "MatrixPlugin.h"
 #import "MatrixLogDef.h"
 #import "MatrixAppRebootAnalyzer.h"
-#import "WCCrashBlockMonitorPlugin+Private.h"
 
 // ============================================================================
 #pragma mark - MatrixBuilder
@@ -177,20 +176,11 @@
 - (void)notifyAppBackgroundFetch
 {
     [MatrixAppRebootAnalyzer notifyAppBackgroundFetch];
-
-    WCCrashBlockMonitorPlugin *cbPlugin = (WCCrashBlockMonitorPlugin *) [self getPluginWithTag:[WCCrashBlockMonitorPlugin getTag]];
-    if (cbPlugin) {
-        [cbPlugin handleBackgroundLaunch];
-    }
 }
 
 - (void)notifyAppWillSuspend
 {
     [MatrixAppRebootAnalyzer notifyAppWillSuspend];
-    WCCrashBlockMonitorPlugin *cbPlugin = (WCCrashBlockMonitorPlugin *) [self getPluginWithTag:[WCCrashBlockMonitorPlugin getTag]];
-    if (cbPlugin) {
-        [cbPlugin handleSuspend];
-    }
 }
 #endif
 

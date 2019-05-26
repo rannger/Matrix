@@ -45,19 +45,19 @@ Pod::Spec.new do |matrix|
     arc.requires_arc     = true
     arc.source_files     = "matrix/matrix-iOS/Matrix/**/*.{h,m,mm,c,cpp}"
     arc.exclude_files    = [non_arc_files_1,non_arc_files_2]
-    arc.public_header_files = ["matrix/matrix-iOS/Matrix/Matrix/matrix.h", "matrix/matrix-iOS/Matrix/Matrix/MatrixFramework.h" ,
-      "matrix/matrix-iOS/Matrix/Matrix/AppReboot/MatrixAppRebootType.h","matrix/matrix-iOS/Matrix/Matrix/Issue/MatrixIssue.h",
+    arc.public_header_files = [
+      "matrix/matrix-iOS/Matrix/Matrix/matrix.h", 
+      "matrix/matrix-iOS/Matrix/Matrix/MatrixFramework.h" ,
+      "matrix/matrix-iOS/Matrix/Matrix/AppReboot/MatrixAppRebootType.h",
+      "matrix/matrix-iOS/Matrix/Matrix/Issue/MatrixIssue.h",
       "matrix/matrix-iOS/Matrix/Matrix/Plugin/*.{h}",
-      "matrix/matrix-iOS/Matrix/Matrix/Log/MatrixAdapter.h", "matrix/matrix-iOS/Matrix/Matrix/Test/*.{h}",
+      "matrix/matrix-iOS/Matrix/Matrix/Log/MatrixAdapter.h", 
+      "matrix/matrix-iOS/Matrix/Matrix/Test/*.{h}",
       "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryStatPlugin/WCMemoryStatConfig.h",
-      "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryStatPlugin/WCMemoryStatPlugin.h", "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryStatPlugin/Record/WCMemoryStatModel.h",
-      "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryLogger/memory_stat_err_code.h", "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/WCCrashBlockMonitorPlugin.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/WCCrashBlockMonitorPlugin+Upload.h","matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/WCCrashBlockMonitorConfig.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/WCCrashBlockMonitorDelegate.h","matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/Utility/WCCrashReportInfoUtil.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/Utility/WCCrashReportInterpreter.h","matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/File/WCCrashBlockFileHandler.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/BlockMonitor/WCBlockTypeDef.h","matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/CrashBlockPlugin/Main/BlockMonitor/WCBlockMonitorConfiguration.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/KSCrash/Recording/KSCrashReportWriter.h", "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/KSCrash/Recording/Tools/KSMachineContext.h",
-      "matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/KSCrash/Recording/Tools/KSThread.h","matrix/matrix-iOS/Matrix/WCCrashBlockMonitor/KSCrash/Recording/Tools/KSStackCursor.h"]
+      "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryStatPlugin/WCMemoryStatPlugin.h", 
+      "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryStatPlugin/Record/WCMemoryStatModel.h",
+      "matrix/matrix-iOS/Matrix/WCMemoryStat/MemoryLogger/memory_stat_err_code.h" 
+    ]
     arc.dependency  'matrix-wechat/matrixNonARC1'
   end
 
