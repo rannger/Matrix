@@ -17,6 +17,7 @@
 #include <dlfcn.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include <unistd.h>
@@ -120,13 +121,15 @@ static void __add_info_for_image(const struct mach_header *header, intptr_t slid
 	bool is_wechat_image = false;
     
   const char *app_bundle_name = getAppBundleName();
-  char *app_name = new char[strlen(app_bundle_name) * 2 + 7];
-  char *app_bundle = new char[strlen(app_bundle_name) + 7];
-  strcpy(app_name, "/");
-  strcat(app_name, app_bundle_name);
-  strcat(app_name, ".app/");
-  strcpy(app_bundle, app_name);
-  strcat(app_name, app_bundle_name);
+	static const size_t kMaxAppBundleNameLength = 155;
+	const size_t app_name_length = strnlen(app_bundle_name, kMaxAppBundleNameLength) * 2 + 7;
+	const size_t app_bundle_length = strnlen(app_bundle_name, kMaxAppBundleNameLength) + 7;
+  char *app_name = new char[app_name_length];
+  char *app_bundle = new char[app_bundle_length];
+	bzero(app_name,app_name_length);
+	bzero(app_bundle,app_bundle_length);
+	snprintf(app_name, app_name_length, "/%s.app/%s", app_bundle_name, app_bundle_name);
+	snprintf(app_bundle, app_bundle_length, "/%s.app/", app_bundle_name);
 	
 	segment_command_t *cur_seg_cmd = NULL;
 	uintptr_t cur = (uintptr_t)header + sizeof(mach_header_t);
@@ -149,7 +152,8 @@ static void __add_info_for_image(const struct mach_header *header, intptr_t slid
 
 			Dl_info info = {0};
 			if (dladdr(header, &info) != 0 && info.dli_fname) {
-				if (strlen(info.dli_fname) > strlen(app_name) && !memcmp(info.dli_fname + strlen(info.dli_fname) - strlen(app_name), app_name, strlen(app_name))) {
+				const size_t app_name_strlen = strnlen(app_name, app_name_length);
+				if (strlen(info.dli_fname) > app_name_strlen && !memcmp(info.dli_fname + strlen(info.dli_fname) - app_name_strlen, app_name, app_name_strlen)) {
 				  is_wechat_image = true;
 				}
 				if (strrchr(info.dli_fname, '/') != NULL) {
@@ -160,7 +164,9 @@ static void __add_info_for_image(const struct mach_header *header, intptr_t slid
 			}
 		}
 	}
-	
+
+	delete [] app_name;
+	delete [] app_bundle;
 	// Sort list
 	int i = 0;
 	for (; i < image_info_file.count; ++i) {

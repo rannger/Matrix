@@ -63,7 +63,6 @@ static malloc_logger_t **syscall_logger;	// use this to set up syscall logging (
 
 static pthread_t working_thread = 0;
 static thread_id working_thread_id = 0;
-extern mach_port_t g_matrix_block_monitor_dumping_thread_id;
 
 static int should_working_thread_lock = 0; // 1 is require for locking, 2 is should lock
 
@@ -159,7 +158,7 @@ void __memory_event_callback(uint32_t type_flags, uintptr_t zone_ptr, uintptr_t 
 	
 	thread_id curr_thread = current_thread_id();
 	
-	if (curr_thread == working_thread_id || curr_thread == g_matrix_block_monitor_dumping_thread_id/* || is_thread_ignoring_logging(curr_thread)*/) {
+	if (curr_thread == working_thread_id /* || is_thread_ignoring_logging(curr_thread)*/) {
         // Prevent a thread from deadlocking against itself if vm_allocate() or malloc()
         // is called below here, from woking thread or dumping thread
         return;
